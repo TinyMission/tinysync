@@ -15,6 +15,21 @@ There are currently two libraries supporting TinySync functionality: a native An
 
 ## Architecture
 
+### Overview
+
+A TinySync project uses a strict client/server architecture.
+There is a single server (generally a database-backed web application) that stores the *primary* copy of the system's data.
+Each client (native mobile applications or browser applications) each store a copy of a *subset* of the system's data (see Sync Scopes).
+
+Synchronization is initiated by the client and performed using a single HTTP request with a JSON payload (see Sync Requests and Responses).
+The synchronization interface is defined by a convention of JSON payload format sent between the client and server.
+Individual client libraries exist to perform the synchronization on various client platforms.
+
+All data is assumed to be stored in a table/collection structure inside a database.
+Each table or collection maps to an *entity* and is assumed to have the same schema on both client and server.
+TinySync provides tools for managing the entity schema and providing code generation mechanisms for native client libraries like this one.
+
+
 ### Sync Requests and Responses
 
 The basic mechanism of synchronizing data between the client and server in TinySync can be summarized as:
